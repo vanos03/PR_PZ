@@ -69,14 +69,12 @@ def recursive_link_parser(start_url, target_domain, f_out, visited_urls):
         links = extract_links(html, start_url, f_out, visited_urls)
         
         for link in links:
-
-            if args.visible_links:
-                print(link)
-            if f_out is not None:
-                f_out.write(link + '\n')
             parsed_link = urlparse(link)
-            if parsed_link.netloc == target_domain:
-                if link not in visited_urls:
+            if link not in visited_urls:
+                if args.visible_links: print(link)
+                if f_out is not None: f_out.write(link + '\n')
+
+                if parsed_link.netloc == target_domain:
                     recursive_link_parser(link, target_domain, f_out, visited_urls)
 
 def start_parse(args):
