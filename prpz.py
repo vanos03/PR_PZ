@@ -1,5 +1,6 @@
 import re
 import requests
+# import argparse
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse, urljoin
 
@@ -29,21 +30,28 @@ def extract_links(html, base_url):
             extracted_links.append(href)
         elif re.match(r'^ftp://', href):
             extracted_links.append(href)
-        else:
-            print("Пропущенная ссылка:", href)
+
     return extracted_links
 
-def recursive_link_parser(start_url, visited_urls=set()):
+
+def recursive_link_parser(start_url, target_domain, visited_urls=set()):
     if start_url in visited_urls:
         return
     visited_urls.add(start_url)
-    print("Парсинг ссылки:", start_url)
+    print(start_url)
     html = fetch_page(start_url)
     if html:
         links = extract_links(html, start_url)
         for link in links:
-            recursive_link_parser(link, visited_urls)
+            parsed_link = urlparse(link)
+            if parsed_link.netloc == target_domain:
+                recursive_link_parser(link, target_domain, visited_urls)
 
 
-start_url = "https://www.python.org"
-recursive_link_parser(start_url)
+if __name__ == "__main__":
+
+    # parser = argparse.ArgumentParser(description='Great Description To Be Here')
+
+    start_url = "https://www.mirea.ru"
+    target_domain = urlparse(start_url).netloc
+    recursive_link_parser(start_url, target_domain)
