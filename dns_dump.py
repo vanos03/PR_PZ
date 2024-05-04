@@ -13,6 +13,9 @@ dns_rec_types = ['A', 'AAAA', 'AFSDB', 'APL', 'CAA', 'CDNSKEY', 'CDS', 'CERT',
                  'TA', 'TKEY', 'TLSA', 'TSIG', 'TXT', 'URI']
 
 
+def end(msg):
+    print(msg)
+    sys.exit(1)
 
 def get_args():
     args = argparse.ArgumentParser(description='DNS dumper')
@@ -30,8 +33,8 @@ def create_dns_rec(domain, type):
                 a, answ))
 
     except dns.resolver.NXDOMAIN:
-        print(f'Invalid domain: {domain}')
-        sys.exit(1)
+        end(f'Invalid domain: {domain}')
+        
     except Exception as e:
         if isinstance(e, dns.resolver.NoAnswer):
             print(f'check {type}: No answer')
