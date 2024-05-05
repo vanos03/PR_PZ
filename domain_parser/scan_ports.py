@@ -10,7 +10,7 @@ def get_service_name(port):
 def scan_ports(remote_host):
     open_ports = []
     try:
-        for port in range(20, 443):  # Сканируем порты с 1 до 1024
+        for port in range(20, 443):
             print(port)
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 socket.setdefaulttimeout(1)
@@ -22,10 +22,8 @@ def scan_ports(remote_host):
         print(f"Error scanning port: {e}")
     return open_ports
 
-# IP адрес или доменное имя удаленного хоста
-remote_host = "google.com"  # Замените на интересующий вас IP-адрес или домен
+remote_host = "google.com"
 
-# Сканируем порты и выводим результат
 open_ports = scan_ports(remote_host)
 if open_ports:
     print(f"Open ports on {remote_host}:")
