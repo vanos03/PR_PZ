@@ -2,7 +2,7 @@ import argparse
 
 from dns_dump import dump_dns
 from whois_info import get_whois_inf
-from search_certs import get_subdomains_in_cert
+#from search_certs import get_subdomains_in_cert
 from get_ssl_inf import get_ssl_inf
 from get_web_servs import get_web_servers
 from admin_panel import start_adm_search
