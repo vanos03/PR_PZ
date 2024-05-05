@@ -4,15 +4,13 @@ import sys
 
 def nmap_A_scan(network_prefix):
     nm = nmap.PortScanner()
-    # Настроить параметры сканирования nmap
     scan_raw_result = nm.scan(hosts=network_prefix, arguments='-v -n -A')
-    # Анализировать результаты сканирования
+
     for host, result in scan_raw_result['scan'].items():
         if result['status']['state'] == 'up':
             print('Host: ' + host )
             print("The assumption of the OC")
             
-            # Проверка наличия ключа 'osmatch'
             if 'osmatch' in result:
                 for os in result['osmatch']:
                     print("OC:" + os['name'])
