@@ -1,6 +1,7 @@
 
 import dns.resolver
 import sys
+from nmap_scan import nmap_A_scan
 
 
 # domains = ['google.com']
@@ -56,14 +57,18 @@ def dump_dns(domain):
     answer_list.append(dns_answers)
 
     for i, dns_answers in enumerate(answer_list):
-        print(f'\nDNS Records found for {domain}:')
+        print(f'\n**DNS Records found for {domain}:')
         found_types = list(dns_answers.keys())
         found_types.sort()
         for type in found_types:
             print(' ', type)
             for rdata in dns_answers[type]:
                 print('. ', rdata)
-
+        
+    for rdata in dns_answers['MX']:
+        rdata = str(rdata).split(' ')[1]
+        print(f'\n**Scaning {rdata} ports:')
+        nmap_A_scan(rdata)
 
 
     

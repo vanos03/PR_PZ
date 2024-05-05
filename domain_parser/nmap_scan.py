@@ -9,52 +9,52 @@ def nmap_A_scan(network_prefix):
     # Анализировать результаты сканирования
     for host, result in scan_raw_result['scan'].items():
         if result['status']['state'] == 'up':
-            print('#' * 17 + 'Host:' + host + '#' * 17)
-            print('-' * 20 + "Предположение операционной системы" + '-' * 20)
+            print('Host: ' + host )
+            print("The assumption of the OC")
             
             # Проверка наличия ключа 'osmatch'
             if 'osmatch' in result:
                 for os in result['osmatch']:
-                    print("Операционная система:" + os['name'] + ' ' * 3 + "Точность:" + os['accuracy'])
+                    print("OC:" + os['name'])
             else:
-                print("Операционная система не была определена.")
-            idno = 1
+                print("OC has not been identified")
+
             try:
+                print( "\n\n*TCP scan details:")
                 for port in result['tcp']:
                     try:
-                        print('-' * 17 + "Детали TCP-сервера" + '[' + str(idno) + ']' + '-' * 17)
-                        idno += 1
-                        print('Номер порта TCP:' + str(port))
+                        print('\n.TCP port:' + str(port))
                         try:
-                            print('положение дел:' + result['tcp'][port]['state'])
+                            print('..state:' + result['tcp'][port]['state'])
                         except:
                             pass
                         try:
-                            print('причина:' + result['tcp'][port]['reason'])
+                            print('..reason:' + result['tcp'][port]['reason'])
                         except:
                             pass
                         try:
-                            print('Дополнительная информация:' + result['tcp'][port]['extrainfo'])
+                            print('..extrainfo:' + result['tcp'][port]['extrainfo'])
                         except:
                             pass
                         try:
-                            print('Имя:' + result['tcp'][port]['name'])
+                            print('..name:' + result['tcp'][port]['name'])
                         except:
                             pass
                         try:
-                            print('версия:' + result['tcp'][port]['version'])
+                            print('..version:' + result['tcp'][port]['version'])
                         except:
                             pass
                         try:
-                            print('товар:' + result['tcp'][port]['product'])
+                            print('..product:' + result['tcp'][port]['product'])
                         except:
                             pass
                         try:
-                            print('CPE：' + result['tcp'][port]['cpe'])
+                            print('..CPE：' + result['tcp'][port]['cpe'])
                         except:
+                            print('..CPE：' '-')
                             pass
                         try:
-                            print("Сценарий:" + result['tcp'][port]['script'])
+                            print("..script:" + result['tcp'][port]['script'])
                         except:
                             pass
                     except:
@@ -62,51 +62,45 @@ def nmap_A_scan(network_prefix):
             except:
                 pass
 
-            idno = 1
             try:
+                print( "\n\n*UDP scan details:" )
                 for port in result['udp']:
                     try:
-                        print('-' * 17 + "Детали сервера UDP" + '[' + str(idno) + ']' + '-' * 17)
-                        idno += 1
-                        print('Номер порта UDP:' + str(port))
+                        print('\n.UDP port:' + str(port))
                         try:
-                            print('положение дел:' + result['udp'][port]['state'])
+                            print('..state:' + result['udp'][port]['state'])
                         except:
                             pass
                         try:
-                            print('причина:' + result['udp'][port]['reason'])
+                            print('..reason:' + result['udp'][port]['reason'])
                         except:
                             pass
                         try:
-                            print('Дополнительная информация:' + result['udp'][port]['extrainfo'])
+                            print('..extrainfo:' + result['udp'][port]['extrainfo'])
                         except:
                             pass
                         try:
-                            print('Имя:' + result['udp'][port]['name'])
+                            print('..name:' + result['udp'][port]['name'])
                         except:
                             pass
                         try:
-                            print('версия:' + result['udp'][port]['version'])
+                            print('..version:' + result['udp'][port]['version'])
                         except:
                             pass
                         try:
-                            print('товар:' + result['udp'][port]['product'])
+                            print('..product:' + result['udp'][port]['product'])
                         except:
                             pass
                         try:
-                            print('CPE：' + result['udp'][port]['cpe'])
+                            print('..CPE：' + result['udp'][port]['cpe'])
                         except:
+                            print('..CPE：' '-')
                             pass
                         try:
-                            print("Сценарий:" + result['udp'][port]['script'])
+                            print("..script:" + result['udp'][port]['script'])
                         except:
                             pass
                     except:
                         pass
             except:
-                print("skip")
                 pass
-
-
-if __name__ == '__main__':
-    nmap_A_scan('aid.mirea.ru')

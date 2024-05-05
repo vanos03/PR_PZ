@@ -1,9 +1,9 @@
 import whois
 
-list_field = {"domain_name": "Доменное имя", "registrar": "Регистратор", "updated_date": "Дата обновления",
-                  "creation_date": "Дата создания", "expiration_date": "Дата истечения срока регистрации",
-                  "name_servers": "Серверы NS", "dnssec": "dnssec", "name": "Владелец", "org": "Организация",
-                  "address": "Адрес", "city": "Город", "state": "Штат", "zipcode": "Индекс", "country": "Страна"}
+list_field = {"domain_name": "domain_name", "registrar": "registrar", "updated_date": "updated_date",
+                  "creation_date": "creation_date", "expiration_date": "expiration_date",
+                  "name_servers": "name_servers", "dnssec": "dnssec", "name": "name", "org": "org",
+                  "address": "address", "city": "city", "state": "state", "zipcode": "zipcode", "country": "country"}
 
 def get_whois_inf(domain):
     whois_dict = dict()
