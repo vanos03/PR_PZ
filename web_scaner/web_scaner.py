@@ -42,7 +42,13 @@ if __name__ == '__main__':
         if i != None and i != '':
             print("-"*10 + "\nCheck CPE: " + i  +"-"*10)
             cve = cve_search(i.replace("cpe:/", ''))
-            if cve != []:
+            if cve["CVE"] != []:
                 print("\nPotential CVE: ", )
-    print("\n\nsecond: ", time.time()-start_time)
+                for i in cve["CVE"]:
+                    print('.. ' + i)
+            if cve["CVSS"] != []:
+                print("\nCVSS: ", )
+                for i in cve["CVSS"]:
+                    print('.. ' + i)
+    print("\n Time: " + str(round((time.time()-start_time) / 60)) + " min")
 

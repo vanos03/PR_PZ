@@ -23,10 +23,13 @@ def search_cve_for_cpe(cpe):
 def cve_search(cpe):
     
         # cpe = "cpe:/a:microsoft:sql_server:6.5".split(":/")
-        findes_cve = list()
+        findes_cve = {"CVE": list(), "CVSS": list()}
         cve_list = str(search_cve_for_cpe(cpe)).split(' ')
         for cve_item in cve_list:
             if "CVE" in cve_item:
                 print(cve_item)
-                findes_cve.append(cve_item.replace(',', '').replace("'", ''))
+                findes_cve["CVE"].append(cve_item.replace(',', '').replace("'", ''))
+            if "CVSS" in cve_item:
+                print(cve_item)
+                findes_cve["CVSS"].append(cve_item.replace(',', '').replace("'", ''))
         return findes_cve
