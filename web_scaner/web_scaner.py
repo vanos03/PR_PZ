@@ -24,12 +24,12 @@ if __name__ == '__main__':
     subdomains = find_subdomains(domain)
     subdomains += dump_dns(domain)
     subdomain = set(subdomains)
-    print("Найденные поддомены для {}: {}".format(domain, subdomains))
+    print("-"*10 + f"{domain} subdomains:" + "-"*10, '\n', subdomains)
     cpe = set()
     for subdomain in subdomains:
         cpe_tmp = set()
         subdomain = str(subdomain).replace('www.', '')
-        print(subdomain)
+        print(f"\n.  Search CPE for {subdomain}")
         cpe_tmp = nmap_A_scan(subdomain)
         print(cpe_tmp)
         for i in cpe_tmp:
@@ -40,7 +40,7 @@ if __name__ == '__main__':
     # 'cpe:/a:php:php:7.2.29', 'cpe:/a:igor_sysoev:nginx:1.22.11.22.1'}
     for i in cpe:
         if i != None and i != '':
-            print("-"*10 + "\nCheck CPE: " + i  +"-"*10)
+            print("-"*10 + "Check CPE: " + i  +"-"*10)
             cve = cve_search(i.replace("cpe:/", ''))
             if cve["CVE"] != []:
                 print("\nPotential CVE: ", )

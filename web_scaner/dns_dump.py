@@ -45,7 +45,7 @@ def create_dns_rec(domain, type):
 def dump_dns(domain):
     
     # for domain in domains:
-    print('domain: ', domain)
+    # print('domain: ', domain)
 
     dns_answers = {}
     answer_list = []
@@ -57,13 +57,13 @@ def dump_dns(domain):
 
     subdomains = list()
     for i, dns_answers in enumerate(answer_list):
-        print(f'\nDNS Records found for {domain}:')
+        # print(f'\nDNS Records found for {domain}:')
         found_types = list(dns_answers.keys())
         # found_types.sort()
         for type in found_types:
-            print(' ', type)
+            # print(' ', type)
             for rdata in dns_answers[type]:
-                print('. ', rdata)
+                # print('. ', rdata)
                 rdata = str(rdata).split(' ')
                 for i in rdata:
                     if domain in i:
